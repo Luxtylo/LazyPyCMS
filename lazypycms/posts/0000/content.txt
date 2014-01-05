@@ -1,0 +1,13 @@
+Post name
+2014-01-05
+18:37
+<|--Post image--|>
+Forest.jpg
+<|--Begin summary--|>
+A pretty normal post
+<|--Begin Post--|>
+This is a post.
+
+It looks pretty normal. It's about stuff.
+
+Lorem ipsum dolor, and all that jazz

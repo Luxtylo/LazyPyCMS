@@ -1,0 +1,118 @@
+/* CSS for Luxtylo's blog */
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,300italic|Open+Sans:400,600);
+
+body {
+    width: 1000px;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#headerbox {
+    width: 1000px;
+    
+    margin: 25px auto 30px auto;
+    padding: 25px;
+}
+
+#header {
+    
+    font-size: 64px;
+    font-weight: 600;
+}
+
+#motd {
+    margin-top: 20px;
+    margin-left: 8px;
+    font-size: 24px;
+    color: #333;
+}
+
+.title {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+
+#navbar {
+    margin: 10px;
+}
+
+.navbaritem {
+    padding: 10px 5px 0px 5px;
+    float: left;
+    
+    font-size: 18px;
+    color: #555;
+}
+
+.navbaritem:hover {
+    color: #333;
+}
+
+#contentbox {
+    width: 900px;
+    
+    margin: 0px auto;
+    padding: 15px 30px;
+    
+    background: "#DDD";
+}
+
+.postpreview {
+    margin: 15px 0px 0px 0px;
+    padding: 10px 20px 15px 20px;
+
+    clear: left;
+
+    background: "#EEE";
+}
+
+.postpreviewimage {
+    width: 250px;
+    margin-right: 15px;
+    float: left;
+}
+
+.text {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 300;
+}
+
+h1 {
+    margin-bottom: 25px;
+    padding-top: 0px;
+    padding-left: 0px;
+    
+    font-size: 36px;
+    color: #222;
+}
+
+h2 {
+    margin: 10px 0px;
+    font-size: 24px;
+    color: #222;
+}
+
+strong {
+    font-weight: 600;
+}
+
+i {
+    font-style: italic;
+}
+
+#footer {
+    margin: 20px;
+    margin-top: 60px;
+}
+
+#copyright {
+    padding: 0px 10px 20px 10px;
+    float: left;
+}
+
+#generator {
+    padding: 0px 10px 20px 10px;
+    float: right;
+}
