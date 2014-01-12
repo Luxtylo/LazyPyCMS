@@ -21,6 +21,7 @@ You should have received a copy of the GNU General Public License along with
 
 import os
 import subprocess
+from math import ceil
 
 
 def osSpecifics():
@@ -86,6 +87,32 @@ def convertImages(postFolderList):
 def generatePostPages(postFolderList):
     print("\nGenerating post pages")
 
+    def shortenPost(postContents):
+        lineMaxLength = 92
+        maxPreviewLines = 8
+
+        previewList = []
+
+        lineNum = 1
+        for line in postContents:
+            if lineNum < maxPreviewLines:
+                if len(line) < lineMaxLength:
+                    linesTaken = 1
+                    lineNum += linesTaken
+                else:
+                    linesTaken = ceil(len(line) / lineMaxLength)
+                    if linesTaken + lineNum >= maxPreviewLines:
+                        linesLeft = maxPreviewLines - linesTaken
+                        charsLeft = linesLeft * lineMaxLength
+                        lineShortened = line[:charsLeft]
+                        lineSplit = lineShortened.split(".")
+                        del lineSplit[-1]
+                        del lineSplit[-1]
+                        lineToInsert = "".join(lineSplit) + "."
+                        print(lineToInsert)
+                    else:
+                        lineNum += linesTaken
+
     def generateMainPage():
         pass
 
@@ -99,7 +126,6 @@ def generatePostPages(postFolderList):
         if os.path.isfile(content):
             print("  Generating static page for", directory)
             with open(content) as postFile:
-                previewLineLength = 92
                 post = postFile.readlines()
 
                 imageTag = "<|--Post image--|>\n"
@@ -141,6 +167,8 @@ def generatePostPages(postFolderList):
 
                 title = metadata[0]
                 visibility = metadata[3]
+
+                postPreview = shortenPost(postContents)
                 # Useful things: title, visibility, postTime, postContents, imageLocation
         else:
             print("content.txt not found in", directory)
