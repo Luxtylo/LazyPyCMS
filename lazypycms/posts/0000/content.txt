@@ -1,11 +1,9 @@
-Post name
+A pretty normal post
 2014-01-05
 18:37
 Visible
 <|--Post image--|>
 previewImageResized.png
-<|--Begin title--|>
-A pretty normal post
 <|--Begin Post--|>
 This is a post.
 

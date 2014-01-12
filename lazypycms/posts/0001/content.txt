@@ -1,11 +1,9 @@
-Post name
-2014-01-05
-18:37
+A nice little blog post
+2014-01-07
+12:24
 Visible
 <|--Post image--|>
 previewImageResized.png
-<|--Begin title--|>
-A nice little blog post
 <|--Begin Post--|>
 Bacon ipsum dolor sit amet magna excepteur esse filet mignon, short loin ad sint tail aliqua ea. Irure consectetur aliqua enim, venison andouille ut shoulder sed officia eu ball tip chuck pork. Laborum proident venison ball tip est ham prosciutto sunt anim voluptate magna dolore velit. Cupidatat tenderloin anim pork loin. Anim turkey ut elit sint nulla id laboris frankfurter ball tip cillum velit aliqua.
 

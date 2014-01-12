@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 A quick and simple Python-based CMS
 
@@ -44,7 +45,7 @@ def getPosts():
     return postFolderList
 
 def convertImages(postFolderList):
-    print("Converting post preview images")
+    print("\nConverting post preview images")
     for directory in postFolderList:
         imageFolder = directory + "images" + slashChar
         contents = directory + "contents.txt"
@@ -80,17 +81,67 @@ def convertImages(postFolderList):
             print("\nError:\n  Preview image of post", directory, "not recognised.")
             quit()
 
+    print("Preview images successfully converted")
+
 def generatePostPages(postFolderList):
-    print("Generating post pages")
+    print("\nGenerating post pages")
+
+    def generateMainPage():
+        pass
+
     for directory in postFolderList:
         postsDir = os.path.dirname(os.path.realpath(__file__))
         postsDir += slashChar + "posts" + slashChar
         currentPost = directory.split(slashChar)[-2] + slashChar
+        imageDir = postsDir + currentPost + "images" + slashChar
         content = postsDir + currentPost + "content.txt"
-        print(content)
 
         if os.path.isfile(content):
             print("  Generating static page for", directory)
+            with open(content) as postFile:
+                previewLineLength = 92
+                post = postFile.readlines()
+
+                imageTag = "<|--Post image--|>\n"
+                postTag = "<|--Begin Post--|>\n"
+
+                if imageTag in post:
+                    imageLine = post.index(imageTag) + 2
+                else:
+                    print("\nError:\n  Image line not found in", directory)
+                    quit()
+
+                if postTag in post:
+                    postStartLine = post.index(postTag) + 2
+                else:
+                    print("\nError:\n  Post line not found in", directory)
+                    quit()
+
+                metadata = []
+                postContents = []
+
+                lineNum = 1
+                for line in post:
+                    if lineNum < (imageLine - 1):
+                        metadata.append(line[:-1])
+                    elif lineNum == imageLine:
+                        imageLocation = "images/" + line
+                    elif lineNum > postStartLine:
+                        postContents.append(line[:-1])
+                    lineNum += 1
+
+                timeList = metadata[1].split("-")
+                time = metadata[2].split(":")
+                postTime = {
+                    "year": timeList[0],
+                    "month": timeList[1],
+                    "day": timeList[2],
+                    "hour": time[0],
+                    "minute": time[1]}
+
+                title = metadata[0]
+                visibility = metadata[3]
+                # Useful things: title, visibility, postTime, postContents, imageLocation
         else:
             print("content.txt not found in", directory)
 
