@@ -30,45 +30,74 @@ def osSpecifics():
 
     return slashChar
 
+def getPosts():
+    postFolderList = []
+
+    for dirpath, dnames, fnames in os.walk("./posts"):
+        for d in dnames:
+            #print(dirpath)
+            if dirpath == "./posts":
+                folder = "./posts" + slashChar + d + slashChar
+                postFolderList.append(folder)
+
+    postFolderList.sort()
+    return postFolderList
+
+def convertImages(postFolderList):
+    print("Converting post preview images")
+    for directory in postFolderList:
+        imageFolder = directory + "images" + slashChar
+        contents = directory + "contents.txt"
+        prvwPngName = imageFolder + "previewImage.png"
+        prvwJpgName = imageFolder + "previewImage.jpg"
+        prvwImgResName = imageFolder + "previewImageResized.png"
+
+        if os.path.isfile(prvwPngName):
+            if not os.path.isfile(prvwImgResName):
+                print("  Preview image of", directory, "recognised as PNG and converted")
+                imgConvertCmd = [
+                    "convert",
+                    prvwPngName,
+                    "-resize",
+                    "512",
+                    prvwImgResName]
+                subprocess.call(imgConvertCmd)
+            else:
+                print("  Preview image of",directory,"already converted")
+        elif os.path.isfile(prvwJpgName):
+            if not os.path.isfile(prvwImgResName):
+                print("  Preview image of", directory, "recognised as JPG and converted")
+                imgConvertCmd = [
+                    "convert",
+                    prvwJpgName,
+                    "-resize",
+                    "512",
+                    prvwImgResName]
+                subprocess.call(imgConvertCmd)
+            else:
+                print("  Preview image of",directory,"already converted")
+        else:
+            print("\nError:\n  Preview image of post", directory, "not recognised.")
+            quit()
+
+def generatePostPages(postFolderList):
+    print("Generating post pages")
+    for directory in postFolderList:
+        postsDir = os.path.dirname(os.path.realpath(__file__))
+        postsDir += slashChar + "posts" + slashChar
+        currentPost = directory.split(slashChar)[-2] + slashChar
+        content = postsDir + currentPost + "content.txt"
+        print(content)
+
+        if os.path.isfile(content):
+            print("  Generating static page for", directory)
+        else:
+            print("content.txt not found in", directory)
+
 slashChar = osSpecifics()
 pythonFileLocation = os.path.dirname(os.path.realpath(__file__)) + slashChar
 
-postFolderList = []
+postFolderList = getPosts()
 
-for dirpath, dnames, fnames in os.walk("./posts"):
-    for d in dnames:
-        #print(dirpath)
-        if dirpath == "./posts":
-            folder = "./posts" + slashChar + d + slashChar
-            postFolderList.append(folder)
-
-postFolderList.sort()
-
-for directory in postFolderList:
-    imageFolder = directory + "images" + slashChar
-    contents = directory + "contents.txt"
-    prvwPngName = imageFolder + "previewImage.png"
-    prvwJpgName = imageFolder + "previewImage.jpg"
-    prvwImgResName = imageFolder + "previewImageResized.png"
-
-    if os.path.isfile(prvwPngName):
-        print("Preview image of", directory, "recognised as PNG")
-        imgConvertCmd = [
-            "convert",
-            prvwPngName,
-            "-resize",
-            "512",
-            prvwImgResName]
-        subprocess.call(imgConvertCmd)
-    elif os.path.isfile(prvwJpgName):
-        print("Preview image of", directory, "recognised as JPG")
-        imgConvertCmd = [
-            "convert",
-            prvwJpgName,
-            "-resize",
-            "512",
-            prvwImgResName]
-        subprocess.call(imgConvertCmd)
-    else:
-        print("Preview image of post", directory, "not recognised.")
-        quit()
+convertImages(postFolderList)
+generatePostPages(postFolderList)
