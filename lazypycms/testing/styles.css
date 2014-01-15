@@ -9,14 +9,11 @@ body {
     margin-right: auto;
 }
 
-#headerbox {
+header {
     width: 1000px;
     
     margin: 25px auto 30px auto;
     padding: 25px;
-}
-
-#header {
     
     font-size: 64px;
     font-weight: 600;
@@ -34,42 +31,39 @@ body {
     font-weight: 400;
 }
 
-#navbar {
+nav {
     margin: 10px;
 }
 
-.navbaritem {
+nav a {
     padding: 10px 5px 0px 5px;
     float: left;
-    
+
     font-size: 18px;
     color: #555;
+    text-decoration: none;
 }
 
-.navbaritem:hover {
+nav a:hover {
     color: #333;
 }
 
-#contentbox {
+main {
     width: 900px;
     
     margin: 0px auto;
     padding: 15px 30px;
-    
-    background: "#DDD";
 }
 
-.postpreview {
+article {
     margin: 15px 0px 0px 0px;
     padding: 10px 20px 15px 20px;
 
     clear: left;
-
-    background: "#EEE";
 }
 
 .postpreviewimage {
-    width: 250px;
+    width: 256px;
     margin-right: 15px;
     float: left;
 }
@@ -77,6 +71,13 @@ body {
 .text {
     font-family: "Source Sans Pro", sans-serif;
     font-weight: 300;
+    color: #222;
+}
+
+.text a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #222;
 }
 
 h1 {
@@ -102,9 +103,8 @@ i {
     font-style: italic;
 }
 
-#footer {
-    margin: 20px;
-    margin-top: 60px;
+footer {
+    margin: 10px 20px 0 20px;
 }
 
 #copyright {
