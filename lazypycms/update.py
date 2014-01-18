@@ -102,27 +102,32 @@ def generatePostPages(postFolderList):
                     if line != "\n":
                         linesTakenByLine = 1
                         addToPreview = line
-                        print("singleLine\n  " + addToPreview)
+                        #print("singleLine\n  " + addToPreview)
                 else:
                     linesTakenByLine = round(len(line)/lineMaxLength, 0)
                     linesLeft = maxPreviewLines - lineNum
 
                     if linesLeft >= linesTakenByLine:
                         addToPreview = line
-                        print("multiline\n  " + addToPreview)
+                        #print("multiline\n  " + addToPreview)
                     else:
                         truncatePoint = int(linesLeft * lineMaxLength * 0.9)
                         lineTruncated = line[:truncatePoint]
                         addToPreview = ".".join(lineTruncated.split(".")[:-1])
-                        print("multitrunc\n  " + addToPreview)
+                        #print("multitrunc\n  " + addToPreview)
 
                 previewList.append(addToPreview)
                 lineNum += linesTakenByLine
             else:
                 break
 
+        preview = "\n".join(previewList)
+        return preview
+
     def generateMainPage():
         pass
+
+    posts = []
 
     for directory in postFolderList:
         postsDir = os.path.dirname(os.path.realpath(__file__))
@@ -159,7 +164,7 @@ def generatePostPages(postFolderList):
                     if lineNum < (imageLine - 1):
                         metadata.append(line[:-1])
                     elif lineNum == imageLine:
-                        imageLocation = "images/" + line
+                        imageLocation = "images/" + line[:-1]
                     elif lineNum > postStartLine:
                         postContents.append(line[:-1])
                     lineNum += 1
@@ -176,8 +181,10 @@ def generatePostPages(postFolderList):
                 title = metadata[0]
                 visibility = metadata[3]
 
-                postPreview = shortenPost(postContents)
-                # Useful things: title, visibility, postTime, postContents, imageLocation
+                preview = shortenPost(postContents)
+                contents = "\n".join(postContents)
+                # Useful things: title, visibility, postTime, contents, preview, imageLocation
+                postData = [title, postTime, visibility, imageLocation, preview, contents]
         else:
             print("content.txt not found in", directory)
 
