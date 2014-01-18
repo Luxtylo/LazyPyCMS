@@ -82,6 +82,8 @@ def convertImages(postFolderList):
             print("\nError:\n  Preview image of post", directory, "not recognised.")
             quit()
 
+        # Should use pngcrush here
+
     print("Preview images successfully converted")
 
 def generatePostPages(postFolderList):
