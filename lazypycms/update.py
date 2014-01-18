@@ -48,15 +48,18 @@ def getPosts():
 def convertImages(postFolderList):
     print("\nConverting post preview images")
     for directory in postFolderList:
+        print("\n  " + directory + ":")
+
         imageFolder = directory + "images" + slashChar
         contents = directory + "contents.txt"
         prvwPngName = imageFolder + "previewImage.png"
         prvwJpgName = imageFolder + "previewImage.jpg"
-        prvwImgResName = imageFolder + "previewImageResized.png"
+        prvwImgResName = imageFolder + "previewImageTemp.png"
+        prvwImgFinal = imageFolder + "previewImageResized.png"
 
         if os.path.isfile(prvwPngName):
-            if not os.path.isfile(prvwImgResName):
-                print("  Preview image of", directory, "recognised as PNG and converted")
+            if not os.path.isfile(prvwImgFinal):
+                print("    Preview image of", directory, "recognised as PNG and converted")
                 imgConvertCmd = [
                     "convert",
                     prvwPngName,
@@ -64,11 +67,19 @@ def convertImages(postFolderList):
                     "512",
                     prvwImgResName]
                 subprocess.call(imgConvertCmd)
+
+                imgCrushCmd = [
+                    "pngcrush",
+                    prvwImgResName,
+                    prvwImgFinal]
+                subprocess.call(imgCrushCmd)
+
+                os.remove(prvwImgResName)
             else:
-                print("  Preview image of",directory,"already converted")
+                print("    Preview image of",directory,"already converted")
         elif os.path.isfile(prvwJpgName):
-            if not os.path.isfile(prvwImgResName):
-                print("  Preview image of", directory, "recognised as JPG and converted")
+            if not os.path.isfile(prvwImgFinal):
+                print("    Preview image of", directory, "recognised as JPG and converted")
                 imgConvertCmd = [
                     "convert",
                     prvwJpgName,
@@ -76,15 +87,41 @@ def convertImages(postFolderList):
                     "512",
                     prvwImgResName]
                 subprocess.call(imgConvertCmd)
+
+                imgCrushCmd = [
+                    "pngcrush",
+                    prvwImgResName,
+                    prvwImgFinal]
+                subprocess.call(imgCrushCmd)
+
+                os.remove(prvwImgResName)
             else:
-                print("  Preview image of",directory,"already converted")
+                print("    Preview image of",directory,"already converted")
         else:
             print("\nError:\n  Preview image of post", directory, "not recognised.")
             quit()
 
-        # Should use pngcrush here
+        print("    Compressing post images")
+        for img in os.listdir(imageFolder):
+            if img[:3] == "img":
+                imgNum = img.split("-")[-1].split(".")[0]
+                imgLoc = imageFolder + img
+                resizedLoc = imageFolder + "image-" + imgNum + ".jpg"
 
-    print("Preview images successfully converted")
+                if not os.path.isfile(resizedLoc):
+                    imgResCommand = [
+                        "convert",
+                        imgLoc,
+                        "-resize",
+                        "1024",
+                        "-interlace",
+                        "Plane",
+                        "-quality",
+                        "75%",
+                        resizedLoc]
+                    subprocess.call(imgResCommand)
+
+    print("\nImages successfully converted")
 
 def generatePostPages(postFolderList):
     print("\nGenerating post pages")
