@@ -91,7 +91,7 @@ def generatePostPages(postFolderList):
 
     def shortenPost(postContents):
         lineMaxLength = 92
-        maxPreviewLines = 8
+        maxPreviewLines = 6
 
         previewList = []
 
@@ -99,21 +99,27 @@ def generatePostPages(postFolderList):
         for line in postContents:
             if lineNum < maxPreviewLines:
                 if len(line) < lineMaxLength:
-                    linesTaken = 1
-                    lineNum += linesTaken
+                    if line != "\n":
+                        linesTakenByLine = 1
+                        addToPreview = line
+                        print("singleLine\n  " + addToPreview)
                 else:
-                    linesTaken = ceil(len(line) / lineMaxLength)
-                    if linesTaken + lineNum >= maxPreviewLines:
-                        linesLeft = maxPreviewLines - linesTaken
-                        charsLeft = linesLeft * lineMaxLength
-                        lineShortened = line[:charsLeft]
-                        lineSplit = lineShortened.split(".")
-                        del lineSplit[-1]
-                        del lineSplit[-1]
-                        lineToInsert = "".join(lineSplit) + "."
-                        print(lineToInsert)
+                    linesTakenByLine = round(len(line)/lineMaxLength, 0)
+                    linesLeft = maxPreviewLines - lineNum
+
+                    if linesLeft >= linesTakenByLine:
+                        addToPreview = line
+                        print("multiline\n  " + addToPreview)
                     else:
-                        lineNum += linesTaken
+                        truncatePoint = int(linesLeft * lineMaxLength * 0.9)
+                        lineTruncated = line[:truncatePoint]
+                        addToPreview = ".".join(lineTruncated.split(".")[:-1])
+                        print("multitrunc\n  " + addToPreview)
+
+                previewList.append(addToPreview)
+                lineNum += linesTakenByLine
+            else:
+                break
 
     def generateMainPage():
         pass
@@ -140,7 +146,7 @@ def generatePostPages(postFolderList):
                     quit()
 
                 if postTag in post:
-                    postStartLine = post.index(postTag) + 2
+                    postStartLine = post.index(postTag) + 1
                 else:
                     print("\nError:\n  Post line not found in", directory)
                     quit()
