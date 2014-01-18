@@ -1,16 +1,41 @@
-A nice little blog post
-2014-01-07
-12:24
+Moving my PC
+2013/11/09
+15:00
 Visible
 <|--Post image--|>
 previewImageResized.png
 <|--Begin Post--|>
-Bacon ipsum dolor sit amet magna excepteur esse filet mignon, short loin ad sint tail aliqua ea. Irure consectetur aliqua enim, venison andouille ut shoulder sed officia eu ball tip chuck pork. Laborum proident venison ball tip est ham prosciutto sunt anim voluptate magna dolore velit. Cupidatat tenderloin anim pork loin. Anim turkey ut elit sint nulla id laboris frankfurter ball tip cillum velit aliqua.
+The old position of my PC was not ideal. It was in the far corner of our living room, making plenty of noise to irritate whoever was watching TV at the time. It was a relief when it turned off. So I set out to:
 
-Corned beef short loin biltong beef ribs. Shankle rump duis beef ribs. Nisi magna meatball, sausage boudin chicken pariatur proident. Filet mignon leberkas fatback pariatur aliqua ribeye enim commodo nisi salami beef anim chicken ut. Chuck voluptate short ribs ham hock corned beef esse dolore venison tongue proident velit sunt. Doner irure short ribs, tongue meatloaf t-bone qui mollit pork belly ad proident eu duis cupidatat.
+* Get my PC out of the living room
+* Make the arrangement in its new home as unobtrusive as possible
 
-Ea filet mignon chuck qui frankfurter turkey. Aliquip tenderloin id adipisicing elit rump beef fatback ut jowl beef ribs tail shankle ut. Ullamco non ground round ex aute boudin eiusmod dolor fugiat qui est t-bone venison. Turkey veniam cupidatat tenderloin elit ad turducken. Bacon ham elit dolore ball tip capicola, adipisicing cillum strip steak fatback laborum. Minim veniam ground round qui, salami short loin brisket tempor id landjaeger.
+This meant moving my standing desk/cupboard to the room next to the kitchen - the "kids' room" as it used to be called, although I prefer to write it as "the kidsroom". There's a lot of furniture in the kidsroom, and it would probably need to be moved around to fit the standing desk in. My desk was one of two identical cupboards we bought from IKEA a long time ago, and they fit together to almost form a cube, so that was my ideal arrangement for those parts.
 
-Ut pariatur fatback incididunt ex. Bacon kielbasa velit spare ribs shank brisket aliqua laborum jowl corned beef leberkas. Nisi aute sirloin strip steak ea jerky spare ribs eiusmod salami frankfurter beef ribs commodo sed in reprehenderit. Strip steak prosciutto cow jowl adipisicing elit, meatloaf fugiat. T-bone enim tongue minim, ham hock chicken in.
+|img-1.png|
 
-Filet mignon prosciutto elit fugiat reprehenderit nostrud laborum. Do ham hock quis, ea pancetta tenderloin sed id esse irure turducken. Do consequat enim labore cow leberkas pork nulla kielbasa magna andouille venison. Strip steak venison consequat frankfurter aliquip. Pariatur fatback pork loin shoulder.
+I began modelling in SketchUp to get an idea for the space I had. It was tempting to use Blender so I could carry on getting the hang of it, but my familiarity with SketchUp won out.
+
+|img-2.png|
+
+Some basic colouring, and you can see one of the IKEA cupboards in the bottom left of the room, under the hanging cabinets. My models were simple but more than adequate to convey the dimensions I needed to visualise the space.
+
+|img-3.png|
+
+The above screenshot shows the layout of the existing items of furniture, with my cabinet added in the centre. The dark wooden table with semicircular wooden flaps (on the left of the image) does not need to be in the room, and will probably be removed once our home clear-out is done.
+
+|img-4.png|
+
+After moving the furniture around a lot, I ended up moving almost all of it back to its original place, and simply placing the two cabinets back-to-back. The non-computer cabinet faces into the kitchen and fortunately does not obstruct the fridge.
+
+|img-5.png|
+
+|img-6.jpg|
+
+As you can see, I didn't really accomplish my goal of "unobtrusive", but at least the PC is now out of the living room. My next step will hopefully be to modify the case to make it run cooler and quieter, and maybe even the cupboard so that I can close the door and have adequate airflow.
+
+I also added a small table from the kitchen between the cupboards and the wall - this gives me somewhere to put my bag and schoolbooks.
+
+Thanks for looking,
+
+George

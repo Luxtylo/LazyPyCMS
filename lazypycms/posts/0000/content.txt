@@ -1,20 +1,41 @@
-A pretty normal post
-2014-01-05
-18:37
+Continuing an old project
+2013-10-28
+11:22
 Visible
 <|--Post image--|>
 previewImageResized.png
 <|--Begin Post--|>
-This is a post.
+It's been a long time, but I've stared working on an old project again: my electric guitar. I stopped back in late 2009 or early 2010 - I just didn't have the tools, skills or motivation I needed to continue. Maybe now I do. All I know is that I'm getting sick of looking at the parts in my garage whenever I work on something else.
 
-It looks pretty normal. It's about stuff.
+So my goal this half term will be to get as far as I can on the guitar. What had stumped me before was the fact I had to use a router to make the holes in the body for the pickups and bridge. As a 12 year old, the router was a pretty scary and uncontrollable tool, even with a template. Now I could probably freehand the holes I need with reasonable accuracy (although of course this is *not* a good idea). Another thing was that the body was too thin for the bridge, and I had already rounded edges of the top - which had the grain running perpendicular to the direction in which it should be running.
 
-Lorem ipsum dolor, and all that jazz. I can't be bothered to find a proper lorem ipsum text, so I'm just writing nonsense to fill up the space. Ok, this is taking a long time, so I will find some lorem ipsum. Bacon ipsum dolor sit amet magna excepteur esse filet mignon, short loin ad sint tail aliqua ea. Irure consectetur aliqua enim, venison andouille ut shoulder sed officia eu ball tip chuck pork. Laborum proident venison ball tip est ham prosciutto sunt anim voluptate magna dolore velit. Cupidatat tenderloin anim pork loin. Anim turkey ut elit sint nulla id laboris frankfurter ball tip cillum velit aliqua.
+So 12 year old me was stuck and gave up - the jigsaw I'd have to use to cut another layer of wood to glue to the bottom was a terrifying beast as well, and every bit as noisy and dangerous as the router. The neck was more difficult than I had anticipated, too; Due to the lack of a truss rod it lacked the curve which is ubiquitous in electric guitars, which would make it very difficult to play high notes. The head would also be difficult to attach, as it is a separate piece (and should really be made from the same piece of wood) and so the joint would be a major weak point.
 
-Corned beef short loin biltong beef ribs. Shankle rump duis beef ribs. Nisi magna meatball, sausage boudin chicken pariatur proident. Filet mignon leberkas fatback pariatur aliqua ribeye enim commodo nisi salami beef anim chicken ut. Chuck voluptate short ribs ham hock corned beef esse dolore venison tongue proident velit sunt. Doner irure short ribs, tongue meatloaf t-bone qui mollit pork belly ad proident eu duis cupidatat.
+Those are problems I think I can solve now. My solutions won't be ideal, but the only other option would be to restart the project - something I'm not willing to do at this stage, as my main interest in finishing it at this point is for the sake of finishing it. For the body depth issue, I'll simply glue a new piece of wood to the back of the body - this will give me the depth I need for the bridge of the guitar to fit without sticking out the back. As for the neck, I'll work with what I have and hope it doesn't break. If it does it's a separate part to the body so won't damage it, and I'll know what not to do when making its replacement.
 
-Ea filet mignon chuck qui frankfurter turkey. Aliquip tenderloin id adipisicing elit rump beef fatback ut jowl beef ribs tail shankle ut. Ullamco non ground round ex aute boudin eiusmod dolor fugiat qui est t-bone venison. Turkey veniam cupidatat tenderloin elit ad turducken. Bacon ham elit dolore ball tip capicola, adipisicing cillum strip steak fatback laborum. Minim veniam ground round qui, salami short loin brisket tempor id landjaeger.
+Here's what I had to start off with today
 
-Ut pariatur fatback incididunt ex. Bacon kielbasa velit spare ribs shank brisket aliqua laborum jowl corned beef leberkas. Nisi aute sirloin strip steak ea jerky spare ribs eiusmod salami frankfurter beef ribs commodo sed in reprehenderit. Strip steak prosciutto cow jowl adipisicing elit, meatloaf fugiat. T-bone enim tongue minim, ham hock chicken in.
+|img-1.jpg|
 
-Filet mignon prosciutto elit fugiat reprehenderit nostrud laborum. Do ham hock quis, ea pancetta tenderloin sed id esse irure turducken. Do consequat enim labore cow leberkas pork nulla kielbasa magna andouille venison. Strip steak venison consequat frankfurter aliquip. Pariatur fatback pork loin shoulder.
+Not pictured is the head, which looks good but is too thick - fortunately it's thick enough that I should be able to very carefully cut parallel to the faces of the wood to thin it down. The design of the guitar is loosely based on the fake Stratocaster you can see in the bottom right of the picture, although I did the odd splitting of the top "horn" and the bottom left curve, and lengthened the bottom "horn". The plan is to paint the split-off parts of the body a different colour - maybe the main body white and those parts black. Eventually I'll do some colouring in Photoshop to see what looks best, but that can wait till it's mostly finished.
+
+So now it's onto the work I did today. I didn't have a piece of wood big enough to make the back in one piece, so I split the back up (and somehow cut it remarkably accurately despite occasionally going over the lines with my jigsaw). The body is now about half MDF, so it's not going to have the best tone ever, but it'll hopefully be good enough that non guitar-afficionados - including myself - won't be able to tell. The wood is reused from some cupboard doors, as you can tell from the screw-holes in the picture below.
+
+|img-2.jpg|
+
+Took the pieces back off and brushed on some PVA glue to stick the parts together
+
+|img-3.jpg|
+
+Next it was time for some clamp sculptures. Thanks to some clamps from my grandfather, I could actually clamp it well with two clamps left over.
+
+|img-4.jpg|
+
+Used some of the PVA I had left over to fill in the gap, although it will definitely still need to be filled with some wood filler.
+
+|img-5.jpg|
+
+Overall, I think that's a good way to reboot the project. Hopefully I'll carry on with this throughout the half-term holiday.
+
+Thanks for reading,
+George
