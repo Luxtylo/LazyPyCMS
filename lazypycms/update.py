@@ -220,10 +220,14 @@ def generatePostPages(postFolderList):
 
                 preview = shortenPost(postContents)
                 contents = "\n".join(postContents)
+
                 # Useful things: title, visibility, postTime, contents, preview, imageLocation
                 postData = [title, postTime, visibility, imageLocation, preview, contents]
+                posts.append(postData)
         else:
             print("content.txt not found in", directory)
+
+    return posts
 
 slashChar = osSpecifics()
 pythonFileLocation = os.path.dirname(os.path.realpath(__file__)) + slashChar
@@ -231,4 +235,7 @@ pythonFileLocation = os.path.dirname(os.path.realpath(__file__)) + slashChar
 postFolderList = getPosts()
 
 convertImages(postFolderList)
-generatePostPages(postFolderList)
+posts = generatePostPages(postFolderList)
+
+# Change posts to be in reverse chronological order
+posts = posts[::-1]
