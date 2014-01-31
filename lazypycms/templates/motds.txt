@@ -1,7 +1,5 @@
 Regular post schedule? Nah.
 Who needs proofreading?
-Making stuff, breaking stuff.
+Making stuff, breaking stuff
 Because I couldn't come up with a better name.
 if viewer==True: print("Hi!")
-Where did the Python go?
-Design, Programming, Awesome.

@@ -1,0 +1,9 @@
+
+<article class="text fixul">
+    <a href="{postLocation}">
+        <img src="{imgSource}" alt="{imgAlt}" class="postpreviewimage"></img>
+        <h2 class="title">{postTitle}</h2>
+    </a>
+    {postContents}
+    <div class="clear">&nbsp;</div>
+</article>

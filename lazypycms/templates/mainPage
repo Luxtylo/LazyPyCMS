@@ -13,13 +13,13 @@
         //  -->
     </script>
 </head>
-<body onload="JavaScript:timedRefresh(5000)">
+<body>
     <header>
         <div id="sitename" class="title">
             <a href="index.html" class="title">Luxtylo</a>
         </div>
         <div id="motd" class="title">
-            Regular post schedule? Nah.
+            {motd}
         </div>
         <nav>
             <a href="index.html" class="title">Home</a>
@@ -31,25 +31,7 @@
     </header>
     <main>
         <h1 class="title">Posts</h1>
-        <article class="text fixul">
-            <a href="post.html">
-                <img src="../posts/0001/images/previewImageResized.png" alt="A forest scene" class="postpreviewimage"></img>
-                <h2 class="title">Moving my PC</h2>
-            </a>
-            The old position of my PC was not ideal. It was in the far corner of our living room, making plenty of noise to irritate whoever was watching TV at the time. It was a relief when it turned off. So I set out to:<br/>
-            <ul>
-                <li>Get my PC out of the living room</li>
-            </ul>
-            <div class="clear">&nbsp;</div>
-        </article>
-        <article class="text fixul">
-            <a href="post2.html">
-                <img src="../posts/0000/images/previewImageResized.png" alt="A snowy scene" class="postpreviewimage"></img>
-                <h2 class="title">Continuing an old project</h2>
-            </a>
-            It's been a long time, but I've started working on an old project again: my electric guitar. I stopped back in late 2009 or early 2010 - I just didn't have the tools, skills or motivation I needed to continue. Maybe now I do. All I know is that I'm getting sick of looking at the parts in my garage whenever I work on something else.
-            <div class="clear">&nbsp;</div>
-        </article>
+        {articles}
     </main>
     <footer>
         <div id="copyright" class="text">

@@ -145,6 +145,10 @@ ul {
     list-style: disc;
 }
 
+.fixul ul {
+    margin-left: 310px;
+}
+
 footer {
     margin: 20px 20px 0 20px;
 }
