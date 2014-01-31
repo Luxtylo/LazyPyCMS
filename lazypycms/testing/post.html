@@ -5,8 +5,15 @@
     <link rel="stylesheet" type="text/css" href="reset.css"/>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,300italic|Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <script type="text/JavaScript">
+        <!--
+        function timedRefresh(timeoutPeriod) {
+            setTimeout("location.reload(true);",timeoutPeriod);
+        }
+        //  -->
+    </script>
 </head>
-<body>
+<body onload="JavaScript:timedRefresh(5000)">
     <header>
         <div id="sitename" class="title">
             <a href="index.html" class="title">Luxtylo</a>
@@ -27,8 +34,12 @@
         <article class="text">
             <img src="images/0001Preview.png" alt="A forest scene" class="postheaderimage"></img>
             <p>The old position of my PC was not ideal. It was in the far corner of our living room, making plenty of noise to irritate whoever was watching TV at the time. It was a relief when it turned off. So I set out to:</p>
-            <p>* Get my PC out of the living room
-            * Make the arrangement in its new home as unobtrusive as possible</p>
+            <p>
+            <ul>
+                <li>Get my PC out of the living room</li>
+                <li>Make the arrangement in its new home as unobtrusive as possible</li>
+            </ul>
+            </p>
             <p>This meant moving my standing desk/cupboard to the room next to the kitchen - the "kids' room" as it used to be called, although I prefer to write it as "the kidsroom". There's a lot of furniture in the kidsroom, and it would probably need to be moved around to fit the standing desk in. My desk was one of two identical cupboards we bought from IKEA a long time ago, and they fit together to almost form a cube, so that was my ideal arrangement for those parts.</p>
             |img-1.png|
             <p>I began modelling in SketchUp to get an idea for the space I had. It was tempting to use Blender so I could carry on getting the hang of it, but my familiarity with SketchUp won out.</p>
