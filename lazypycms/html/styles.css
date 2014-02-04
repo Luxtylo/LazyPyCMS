@@ -121,6 +121,16 @@ h1 {
     color: #222;
 }
 
+time {
+    display: block;
+    float: right;
+
+    margin-top: -40px;
+
+    font-size: 12px;
+    color: #BBB;
+}
+
 h2 {
     margin: 0 0 10px 0;
     font-size: 24px;
