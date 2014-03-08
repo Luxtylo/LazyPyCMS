@@ -17,11 +17,14 @@ Generate a static blog site from individual post files.
 * gen_frontpage - Takes list of posts in date order, gets their summaries and generates a front page from them
 
 ##More detailed function plan
-class new_post:
+class PostMaker:
     contains extract_post, save_post, post_write_ui
     def post_write_ui - starts post UI - text box, "insert image" button
-    def extract_post - runs post_parser, then save_post
+    def extract_post - puts data in variables, then runs save_post
     def save_post - saves post data in new folder in posts/. Can also run img_compress and gen_html if box is checked (on by default)
+
+class Post:
+    contains all post attributes
 
 posts_iterate:
     Uses os module to go through all post folders in posts/
@@ -33,7 +36,7 @@ posts_iterate:
 
 post_parser
     Gets passed post contents, and parses them, creating a dict with:
-        Post title, date, time, visibility, image, contents, preview
+        Post title, date, time, visibility, image, contents, preview, tags
 
 gen_html
     Parses post contents and generates HTML from this
