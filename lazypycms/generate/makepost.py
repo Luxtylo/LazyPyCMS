@@ -19,13 +19,13 @@ You should have received a copy of the GNU General Public License along with
 """
 
 import tkinter as tk
+from datetime import datetime
 
 class Post():
     def __init__(self):
         self.title = None
-        self.postDate = None
-        self.time = None
-        self.visibility = None
+        self.postTime = None
+        self.isVisible = None
         self.headerImage = None
         self.contents = None
         self.html = None
@@ -35,7 +35,6 @@ class Post():
 class PostMaker:
     def __init__(self, siteName, categories):
         self.siteName = siteName
-        self.post = Post()
 
         self.postTags = categories
 
@@ -49,65 +48,88 @@ class PostMaker:
         self.postTag.set(self.postTags[0]) # Set default tag to first supplied
 
         # Row 0
-        row0Frame = tk.Frame(self.root)
-        row0Frame.pack(fill=tk.X, expand=0)
+        self.row0Frame = tk.Frame(self.root)
+        self.row0Frame.pack(fill=tk.X, expand=0)
 
-        titleLabel = tk.Label(row0Frame, text="Title:", width=5)
-        titleLabel.pack(side=tk.LEFT, expand=0)
+        self.titleLabel = tk.Label(self.row0Frame, text="Title:", width=5)
+        self.titleLabel.pack(side=tk.LEFT, expand=0)
 
-        titleBox = tk.Entry(row0Frame)
-        titleBox.pack(side=tk.RIGHT, fill=tk.X, expand=1)
+        self.titleBox = tk.Entry(self.row0Frame)
+        self.titleBox.pack(side=tk.RIGHT, fill=tk.X, expand=1)
 
         # Row 1
-        row1Frame = tk.Frame(self.root)
-        row1Frame.pack(fill=tk.X, expand=0)
+        self.row1Frame = tk.Frame(self.root)
+        self.row1Frame.pack(fill=tk.X, expand=0)
 
-        imgLocSel = tk.Button(row1Frame, text="Select Image")
-        imgLocSel.pack(side=tk.LEFT, expand=0)
+        self.imgLocSel = tk.Button(self.row1Frame, text="Select Image")
+        self.imgLocSel.pack(side=tk.LEFT, expand=0)
 
-        imgLocBox = tk.Entry(row1Frame)
-        imgLocBox.pack(side=tk.RIGHT, expand=1, fill=tk.X)
+        self.imgLocBox = tk.Entry(self.row1Frame)
+        self.imgLocBox.pack(side=tk.RIGHT, expand=1, fill=tk.X)
 
         # Row 2
-        row2Frame = tk.Frame(self.root)
-        row2Frame.pack(fill=tk.X, expand=0)
+        self.row2Frame = tk.Frame(self.root)
+        self.row2Frame.pack(fill=tk.X, expand=0)
 
-        postLabel = tk.Label(row2Frame, text="Post:", width=5)
-        postLabel.pack(side=tk.LEFT, expand=0)
+        self.postLabel = tk.Label(self.row2Frame, text="Post:", width=5)
+        self.postLabel.pack(side=tk.LEFT, expand=0)
 
-        visibleCheck = tk.Checkbutton(
-                row2Frame,
+        self.postVisible = tk.IntVar()
+        self.visibleCheck = tk.Checkbutton(
+                self.row2Frame,
                 text="Visible",
-                variable = self.post.visibility)
-        visibleCheck.pack(side=tk.RIGHT, expand=0)
+                variable = self.postVisible)
+        self.visibleCheck.pack(side=tk.RIGHT, expand=0)
 
         # Row 3
-        postBox = tk.Text(self.root)
-        postBox.pack(expand=1, fill=tk.BOTH)
+        self.postBox = tk.Text(self.root)
+        self.postBox.pack(expand=1, fill=tk.BOTH)
 
         # Row 4
-        row3Frame = tk.Frame(self.root)
-        row3Frame.pack(fill=tk.X, expand=0)
+        self.row3Frame = tk.Frame(self.root)
+        self.row3Frame.pack(fill=tk.X, expand=0)
 
-        tagLabel = tk.Label(row3Frame, text="Category:", width=8)
-        tagLabel.pack(side=tk.LEFT)
+        self.tagLabel = tk.Label(self.row3Frame, text="Category:", width=8)
+        self.tagLabel.pack(side=tk.LEFT)
 
-        tagSelect = tk.OptionMenu(
-                row3Frame,
+        self.tagSelect = tk.OptionMenu(
+                self.row3Frame,
                 self.postTag,
                 *self.postTags)
-        tagSelect.pack(side=tk.LEFT, fill=tk.X)
+        self.tagSelect.pack(side=tk.LEFT, fill=tk.X)
 
-        submitButton = tk.Button(
-                row3Frame,
+        self.submitButton = tk.Button(
+                self.row3Frame,
                 text="Submit",
                 command=self.extract_post)
-        submitButton.pack(side=tk.RIGHT)
+        self.submitButton.pack(side=tk.RIGHT)
 
         self.root.mainloop()
 
     def extract_post(self):
-        pass
+        self.post = Post()
+        self.post.title = self.titleBox.get()
+        self.post.headerImage = self.imgLocBox.get()
+        self.post.contents = self.postBox.get("1.0", tk.END)[:-1]
+        self.post.tag = self.postTag.get()
 
-categories = ["None", "Design", "Photography", "Programming", "Videography"]
-post = PostMaker("gbryant.co.uk", categories)
+        if self.postVisible.get() == 1:
+            self.post.isVisible = True
+        else:
+            self.post.isVisible = False
+
+        self.post.postTime = datetime.now()
+
+        self.root.destroy()
+
+def newPost():
+    siteName = "gbryant.co.uk"
+    categories = ["None", "Design", "Photography", "Programming", "Videography"]
+    makePost = PostMaker(siteName, categories)
+    post = makePost.post
+
+    for variable in post.__dict__.keys():
+        print(variable, post.__dict__[variable])
+
+if __name__ == "__main__":
+    newPost()
