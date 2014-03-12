@@ -57,20 +57,33 @@ def os_specifics():
     slashChar = "/"
     if os.name == "nt":
         slashChar = "\\"
-    print("OS is detected as", os.name)
+    #print("OS is detected as", os.name)
 
     return slashChar
+
+def get_site_details():
+    with open("siteDetails.txt", "r") as detailsFile:
+        details = detailsFile.readlines()
+        siteName = details[0]
+        siteCategories = details[2:-1]
+        siteCategories = [cat.strip() for cat in siteCategories]
+        
+        return (siteName, siteCategories)
 
 if __name__ == "__main__":
     slashChar = os_specifics()
     pythonFileLocation = os.path.dirname(os.path.realpath(__file__)) + slashChar
 
+    (siteName, siteCategories) = get_site_details()
+
     if len(sys.argv) > 1:
         args = sys.argv[1:]
 
-        if "new" in args: # New post
+        if "new" in args:
             print("New post")
-        if "update" in args: # Update site
+            post = makepost.newPost(siteName, siteCategories)
+            post = preview.gen_preview(post)
+        if "update" in args:
             print("Updating")
             posts_iterate()
         if not "new" in args and not "update" in args: # Unrecognised arguments
