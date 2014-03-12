@@ -18,3 +18,21 @@ You should have received a copy of the GNU General Public License along with
 
 """
 
+def gen(post):
+    """Generate HTML from the post passed to it"""
+    def initial_layout():
+        for line in contents:
+            if line == "":
+                print("Newline")
+
+    def formatting_tags():
+        pass
+
+    def special_chars():
+        pass
+
+    contents = post.contents.split("\n")
+    html = []
+
+    print(contents)
+    initial_layout()

@@ -24,7 +24,7 @@ It can be run with the arguments:
 
 import sys
 import os
-import makepost, preview, gen_html
+import make_post, preview, gen_html
 
 def posts_iterate():
     """Iterate through posts and get their information"""
@@ -84,8 +84,11 @@ if __name__ == "__main__":
 
         if "new" in args:
             print("New post")
-            post = makepost.newPost(siteName, siteCategories)
+            post = make_post.newPost(siteName, siteCategories)
             post = preview.gen_preview(post)
+
+            if post.isVisible:
+                gen_html.gen(post)
 
         if "update" in args:
             print("Updating")
