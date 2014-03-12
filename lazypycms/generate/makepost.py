@@ -36,11 +36,14 @@ class PostMaker:
     def __init__(self, siteName, categories):
         self.siteName = siteName
 
+        self.post = Post()
+
         self.postTags = categories
 
         self.post_write_ui()
     
     def post_write_ui(self):
+        """UI for writing post"""
         self.root = tk.Tk()
         self.root.wm_title("New post on " + self.siteName)
 
@@ -107,7 +110,7 @@ class PostMaker:
         self.root.mainloop()
 
     def extract_post(self):
-        self.post = Post()
+        """Get the post's information from the UI and add it to the object"""
         self.post.title = self.titleBox.get()
         self.post.headerImage = self.imgLocBox.get()
         self.post.contents = self.postBox.get("1.0", tk.END)[:-1]
@@ -122,14 +125,17 @@ class PostMaker:
 
         self.root.destroy()
 
-def newPost():
-    siteName = "gbryant.co.uk"
-    categories = ["None", "Design", "Photography", "Programming", "Videography"]
+def newPost(siteName, categories):
+    """Create a new post using the post creation UI"""
     makePost = PostMaker(siteName, categories)
-    post = makePost.post
-
-    for variable in post.__dict__.keys():
-        print(variable, post.__dict__[variable])
+    try:
+        post = makePost.post
+        return post
+    except AttributeError:
+        return 0
 
 if __name__ == "__main__":
-    newPost()
+    """Test newPost using a test siteName and categories"""
+    siteName = "test.co.uk"
+    categories = ["None", "Cat1", "Cat2", "Cat3"]
+    newPost(siteName, categories)
