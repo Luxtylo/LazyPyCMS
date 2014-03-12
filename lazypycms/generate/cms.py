@@ -24,9 +24,10 @@ It can be run with the arguments:
 
 import sys
 import os
-import makepost, parse, gen_html
+import makepost, preview, gen_html
 
 def posts_iterate():
+    """Iterate through posts and get their information"""
     def get_post_folders():
         postFolderList = []
 
@@ -54,6 +55,7 @@ def posts_iterate():
             print("Excluding post " + postNum + " due to lack of a content.txt.")
 
 def os_specifics():
+    """OS-specific stuff"""
     slashChar = "/"
     if os.name == "nt":
         slashChar = "\\"
@@ -62,6 +64,7 @@ def os_specifics():
     return slashChar
 
 def get_site_details():
+    """Find necessary site details from siteDetails.txt"""
     with open("siteDetails.txt", "r") as detailsFile:
         details = detailsFile.readlines()
         siteName = details[0]
@@ -83,12 +86,15 @@ if __name__ == "__main__":
             print("New post")
             post = makepost.newPost(siteName, siteCategories)
             post = preview.gen_preview(post)
+
         if "update" in args:
             print("Updating")
             posts_iterate()
+
         if not "new" in args and not "update" in args: # Unrecognised arguments
             print("\nUnrecognised arguments given. Give arguments:\n  \"new\" to make a new post\n  \"update\" to generate all posts and the front page")
             sys.exit("Unrecognised arguments. Exited.")
+
     else: # If no arguments given
         print("\nNo arguments given. Give arguments:\n  \"new\" to make a new post\n  \"update\" to generate all posts and the front page")
         sys.exit("No arguments given. Exited.")

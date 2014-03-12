@@ -20,3 +20,40 @@ You should have received a copy of the GNU General Public License along with
 
 def gen_preview(post):
     """Generates a preview of the post"""
+    contents = post.contents.split("\n")
+
+    lineMaxLength = 92
+    maxPreviewLines = 6
+
+    previewList = []
+
+    lineNum = 1
+    for line in contents:
+        if lineNum < maxPreviewLines:
+            if len(line) < lineMaxLength:
+                if line != "\n":
+                    linesTakenByLine = 1
+                    addToPreview = line
+                    #print("singleLine\n  " + addToPreview)
+            else:
+                linesTakenByLine = round(len(line)/lineMaxLength, 0)
+                linesLeft = maxPreviewLines - lineNum
+
+                if linesLeft >= linesTakenByLine:
+                    addToPreview = line
+                    #print("multiline\n  " + addToPreview)
+                else:
+                    truncatePoint = int(linesLeft * lineMaxLength * 0.9)
+                    lineTruncated = line[:truncatePoint]
+                    addToPreview = ".".join(lineTruncated.split(".")[:-1])
+                    #print("multitrunc\n  " + addToPreview)
+
+            previewList.append(addToPreview)
+            lineNum += linesTakenByLine
+        else:
+            break
+
+    preview = "\n".join(previewList)
+
+    post.preview = preview
+    return post
