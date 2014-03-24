@@ -19,7 +19,8 @@ You should have received a copy of the GNU General Public License along with
 
 This is LazyPyCMS' main python file.
 It can be run with the arguments:
-    new - this makes
+    new - This makes the program open a post writing GUI
+    update - Update the HTML files in the project
 """
 
 import sys
@@ -85,16 +86,18 @@ if __name__ == "__main__":
         if "new" in args:
             print("New post")
             post = make_post.newPost(siteName, siteCategories)
-            post = preview.gen_preview(post)
+            
+            if post is not 0:
+                post = preview.gen_preview(post)
 
-            if post.isVisible:
-                gen_html.gen(post)
+                if post.isVisible:
+                    gen_html.gen(post)
 
-        if "update" in args:
+        elif "update" in args:
             print("Updating")
             posts_iterate()
 
-        if not "new" in args and not "update" in args: # Unrecognised arguments
+        elif not "new" in args and not "update" in args: # Unrecognised arguments
             print("\nUnrecognised arguments given. Give arguments:\n  \"new\" to make a new post\n  \"update\" to generate all posts and the front page")
             sys.exit("Unrecognised arguments. Exited.")
 

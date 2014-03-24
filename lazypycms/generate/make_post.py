@@ -22,6 +22,7 @@ import tkinter as tk
 from datetime import datetime
 
 class Post():
+    """Post and relevant data"""
     def __init__(self):
         self.title = None
         self.postTime = None
@@ -31,8 +32,10 @@ class Post():
         self.html = None
         self.preview = None
         self.tag = None
+        self.made = False
 
 class PostMaker:
+    """GUI and associated functions for making posts"""
     def __init__(self, siteName, categories):
         self.siteName = siteName
 
@@ -123,6 +126,8 @@ class PostMaker:
 
         self.post.postTime = datetime.now()
 
+        self.post.made = True
+
         self.root.destroy()
 
 def newPost(siteName, categories):
@@ -130,7 +135,11 @@ def newPost(siteName, categories):
     makePost = PostMaker(siteName, categories)
     try:
         post = makePost.post
-        return post
+        if post.made is True:
+            return post
+        else:
+            return 0
+
     except AttributeError:
         return 0
 
