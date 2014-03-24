@@ -1,0 +1,20 @@
+Test Post, Please Ignore
+2014-03-17
+16:02
+Visible
+<|--Post image--|>
+previewImageResized.png
+<|--Begin Post--|>
+This is a test post, for testing the static page generation capabilities of LazyPyCMS. Please ignore it. This will basically be a testbed for my odd variant of Markdown. What this will do is allow you to quickly and easily write a post for your site, and then gen_html.py will parse the code and output (hopefully) valid HTML. This means that the Pi that the site is being hosted on will not need to generate pages on the fly - this will only need to be done when a new post is uploaded to the Pi. The script could also be run on a more powerful computer so it takes less time, which would allow the Pi to do even less work after copying the script over via SSH.
+
+Features included in the markup language are:
+* Bold, underline and italic
+* Bullet points
+* Images
+* Code
+* Blockquotes
+* Maths formatting
+
+|img-1.jpg|
+
+There is some ^bold^ text, some *italic* text and some _underlined_ text. The \^, \* and \_ characters can all be escaped.
