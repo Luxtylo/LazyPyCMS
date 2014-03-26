@@ -31,12 +31,14 @@ def gen(post):
         for inputLine in contents:
             # Paragraphs
             if inputLine != "" and not in_paragraph:
-                textList.append("<p>" + inputLine)
+                textList.append("<p>")
+                textList.append(inputLine)
                 in_paragraph = True
             elif inputLine != "" and in_paragraph:
-                textList.append("<br/>" + inputLine)
+                textList.append("<br/>\n")
+                textList.append(inputLine)
             elif inputLine == "" and in_paragraph:
-                textList.append("</p>")
+                textList.append("</p>\n")
                 in_paragraph = False
         
         # Close final paragraph
@@ -47,14 +49,21 @@ def gen(post):
         return textList
 
     def formatting_tags(textList):
+        first_char = True
         in_italics = False
         in_bold = False
+        in_ul = False
 
-        for lineIndex, line in enumerate(textList):
+        for lineIndex, line in enumerate(textList, 0):
             line = list(line)
             tempLine = list()
 
-            for index, char in enumerate(line):
+            for index, char in enumerate(line, 0):
+                if index == 0:
+                    first_char = True
+                else:
+                    first_char = False
+
                 newChar = char
 
                 if char == "*":
@@ -64,32 +73,49 @@ def gen(post):
                         nextChar = None
 
                     # Italics
-                    if nextChar != "*":
+                    if nextChar != "*" and not first_char:
                         if not in_italics:
+                            print("Italicised", lineIndex, index)
                             newChar = "<i>"
                             in_italics = True
-                            print("Italicised")
                         else:
                             newChar = "</i>"
                             in_italics = False
-                            print("De-italicised")
+
+                        if newChar != "":
+                            tempLine.append(newChar)
 
                     # Bold
-                    elif nextChar == "*":
+                    elif nextChar == "*" and not first_char:
                         if not in_bold:
                             newChar = "<b>"
                             in_bold = True
                             line[index + 1] = ""
-                            print("Bolded")
                         else:
                             newChar = "</b>"
                             in_bold = False
                             line[index + 1] = ""
-                            line[index] = ""
-                            print("De-bolded")
 
-                if newChar != "":
-                    tempLine.append(newChar)
+                        if newChar != "":
+                            tempLine.append(newChar)
+
+                    # Bullet points (ie <ul>s)
+                    elif nextChar == " " and first_char:
+                        if not in_ul:
+                            newChar == "<ul><li>"
+                            in_ul = True
+                        else:
+                            newChar == "<li>"
+
+                        tempLine.append(newChar)
+
+                else:
+                    # End <ul>s on lines without a * at the start
+                    if index == 0 and in_ul:
+                        pass
+
+                    if newChar != "":
+                        tempLine.append(newChar)
             
             # Cleaning up unclosed tags
             if in_italics:
@@ -113,10 +139,11 @@ def gen(post):
     layout = initial_layout()
     formatting = formatting_tags(layout)
     finalHTML = join_list(formatting)
-    print(finalHTML)
+
+    return finalHTML
 
 def testRun():
-    """Test HTML generation using a test post"""
+    """Test HTML generation unewlinesing a test post"""
     testPost = Post()
     testPost.title = "Test"
     testPost.postTime = datetime(2014, 3, 24, 16, 10, 21, 493135)
@@ -128,9 +155,15 @@ def testRun():
 
 This is a post.
 This is a **very good** post.
-Here are *some italics*"""
+Here are *some italics*
 
-    gen(testPost)
+A list:
+* Blah
+* Bloh
+* Bluh"""
+
+    html = gen(testPost)
+    print(html)
 
 if __name__ == "__main__":
     testRun()
