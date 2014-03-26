@@ -31,19 +31,19 @@ def gen(post):
         for inputLine in contents:
             # Paragraphs
             if inputLine != "" and not in_paragraph:
-                textList.append("<p>")
-                textList.append(inputLine)
+                textList.append("\n<p>")
+                textList.append("\n" + inputLine)
                 in_paragraph = True
             elif inputLine != "" and in_paragraph:
-                textList.append("<br/>\n")
-                textList.append(inputLine)
+                textList.append("\n<br/>")
+                textList.append("\n" + inputLine)
             elif inputLine == "" and in_paragraph:
-                textList.append("</p>\n")
+                textList.append("\n</p>")
                 in_paragraph = False
         
         # Close final paragraph
         if in_paragraph:
-            textList.append("</p>")
+            textList.append("\n</p>")
             in_paragraph = False
 
         return textList
@@ -61,6 +61,8 @@ def gen(post):
             for index, char in enumerate(line, 0):
                 if index == 0:
                     first_char = True
+                elif index == 1 and line[index-1] == "\n":
+                    first_char == True
                 else:
                     first_char = False
 
@@ -75,7 +77,6 @@ def gen(post):
                     # Italics
                     if nextChar != "*" and not first_char:
                         if not in_italics:
-                            print("Italicised", lineIndex, index)
                             newChar = "<i>"
                             in_italics = True
                         else:
@@ -102,25 +103,59 @@ def gen(post):
                     # Bullet points (ie <ul>s)
                     elif nextChar == " " and first_char:
                         if not in_ul:
-                            newChar == "<ul><li>"
+                            newChar = "<ul>\n<li>"
                             in_ul = True
+                            line[index + 1] = ""
+                            #del textList[lineIndex-1]
                         else:
-                            newChar == "<li>"
+                            newChar = "<li>"
+                            line[index + 1] = ""
+                            #del textList[lineIndex-1]
 
                         tempLine.append(newChar)
 
                 else:
-                    # End <ul>s on lines without a * at the start
-                    if index == 0 and in_ul:
-                        pass
-
                     if newChar != "":
                         tempLine.append(newChar)
+
+                # Close unclosed <li>s
+                try:
+                    if in_ul and index == len(line)-1:
+                        try:
+                            nextLine = textList[lineIndex+1][1]
+                        except:
+                            nextLine = None
+
+                        try:
+                            lineAfterNext = textList[lineIndex+1][1]
+                        except:
+                            lineAfterNext = None
+
+                        listElement = list("\n<br/>")
+
+                        """if listElement in nextLine or listElement in lineAfterNext:
+                            continuingList = True
+                        else:
+                            continuingList = False"""
+                        continuingList = True
+
+                        print(repr(line))
+
+                        if line != list("\n<br/>") and continuingList:
+                            tempLine.append("</li>")
+                        elif line == list("\n<br/>"):
+                            tempLine = ""
+                except:
+                    pass
             
             # Cleaning up unclosed tags
             if in_italics:
                 tempLine.append("</i>")
                 in_italics = False
+
+            if in_bold:
+                tempLine.append("</b>")
+                in_bold = False
 
             textList[lineIndex] = "".join(tempLine)
 
