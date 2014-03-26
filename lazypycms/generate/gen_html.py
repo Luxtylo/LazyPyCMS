@@ -24,58 +24,96 @@ from datetime import datetime
 def gen(post):
     """Generate HTML from the post passed to it"""
     def initial_layout():
+        textList = []
+        
         in_paragraph = False
-        in_italics = False
 
         for inputLine in contents:
             # Paragraphs
             if inputLine != "" and not in_paragraph:
-                html.append("<p>" + inputLine)
+                textList.append("<p>" + inputLine)
                 in_paragraph = True
             elif inputLine != "" and in_paragraph:
-                html.append("<br/>" + inputLine)
+                textList.append("<br/>" + inputLine)
             elif inputLine == "" and in_paragraph:
-                html.append("</p>")
+                textList.append("</p>")
                 in_paragraph = False
         
         # Close final paragraph
         if in_paragraph:
-            html.append("</p>")
+            textList.append("</p>")
             in_paragraph = False
 
-        for line in html:
+        return textList
+
+    def formatting_tags(textList):
+        in_italics = False
+        in_bold = False
+
+        for lineIndex, line in enumerate(textList):
             line = list(line)
             tempLine = list()
 
-            # Italics
             for index, char in enumerate(line):
+                newChar = char
+
                 if char == "*":
-                    if not in_italics:
-                        #line[index] = "<i>"
-                        tempLine.append("<i>")
-                        in_italics = True
-                        print("Italicised")
-                    else:
-                        #line[index] = "</i>"
-                        tempLine.append("</i>")
-                        in_italics = True
-                        print("De-italicised")
-                else:
-                    tempLine.append(char)
+                    try:
+                        nextChar = line[index + 1]
+                    except IndexError:
+                        nextChar = None
 
-            line = tempLine
+                    # Italics
+                    if nextChar != "*":
+                        if not in_italics:
+                            newChar = "<i>"
+                            in_italics = True
+                            print("Italicised")
+                        else:
+                            newChar = "</i>"
+                            in_italics = False
+                            print("De-italicised")
 
-    def formatting_tags():
+                    # Bold
+                    elif nextChar == "*":
+                        if not in_bold:
+                            newChar = "<b>"
+                            in_bold = True
+                            line[index + 1] = ""
+                            print("Bolded")
+                        else:
+                            newChar = "</b>"
+                            in_bold = False
+                            line[index + 1] = ""
+                            line[index] = ""
+                            print("De-bolded")
+
+                if newChar != "":
+                    tempLine.append(newChar)
+            
+            # Cleaning up unclosed tags
+            if in_italics:
+                tempLine.append("</i>")
+                in_italics = False
+
+            textList[lineIndex] = "".join(tempLine)
+
+        return textList
+
+    def special_chars(finalList):
         pass
 
-    def special_chars():
-        pass
+    def join_list(finalList):
+        for lineIndex, line in enumerate(finalList):
+            finalList[lineIndex] = "".join(line)
+        return "".join(finalList)
 
     contents = post.contents.split("\n")
-    html = []
 
-    initial_layout()
-    print(html)
+    layout = initial_layout()
+    formatting = formatting_tags(layout)
+    finalHTML = join_list(formatting)
+    print(finalHTML)
 
 def testRun():
     """Test HTML generation using a test post"""
@@ -89,7 +127,8 @@ def testRun():
     testPost.contents = """Hello.
 
 This is a post.
-This is a *very good* post."""
+This is a **very good** post.
+Here are *some italics*"""
 
     gen(testPost)
 
