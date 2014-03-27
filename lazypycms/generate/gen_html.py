@@ -82,16 +82,19 @@ def gen(post):
                 if char == "*":
 
                     # Italics
-                    if nextChar != "*" and nextChar != " ":
-                        if not in_italics:
-                            newChar = "<i>"
-                            in_italics = True
+                    if nextChar != "*":
+                        if prevChar != "\\":
+                            if not in_italics and nextChar != " ":
+                                newChar = "<i>"
+                                in_italics = True
+                            else:
+                                newChar = "</i>"
+                                in_italics = False
                         else:
-                            newChar = "</i>"
-                            in_italics = False
+                            del tempLine[-1]
+                            newChar = "*"
 
-                        if newChar != "":
-                            tempLine.append(newChar)
+                        tempLine.append(newChar)
 
                     # Bold
                     elif nextChar == "*" and nextChar != " ":
@@ -104,8 +107,7 @@ def gen(post):
                             in_bold = False
                             line[index + 1] = ""
 
-                        if newChar != "":
-                            tempLine.append(newChar)
+                        tempLine.append(newChar)
 
                     # Bullet points (ie <ul>s)
                     elif nextChar == " " and first_char:
@@ -120,14 +122,15 @@ def gen(post):
                         tempLine.append(newChar)
 
                 elif char == "_":
-                    print("UL", in_underline, repr(prevChar), repr(nextChar))
                     if not in_underline and prevChar == " ":
                         newChar = "<u>"
                         in_underline = True
-                    elif in_underline and nextChar == " ":
+                    elif in_underline and nextChar == " " and prevChar != "\\":
                         newChar = "</u>"
                         in_underline = False
                     else:
+                        if prevChar == "\\":
+                            del tempLine[-1]
                         newChar = "_"
 
                     tempLine.append(newChar)
@@ -211,14 +214,15 @@ def testRun():
 
 This is a post.
 This is a **very good** post.
-Here are *some italics*
+Here are *some italics* - So there.
 
 A list:
 * Blah
 * Bloh
 * Bluh
 
-More _things_ go here. Underlines_in_middle_of_word"""
+More _things_ go here. Underlines_in_middle_of_word
+Escaped \*asterisk and \_underscore"""
 
     html = gen(testPost)
     print(html)
