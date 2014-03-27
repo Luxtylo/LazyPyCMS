@@ -54,6 +54,8 @@ def gen(post):
         in_bold = False
         in_underline = False
         in_ul = False
+        in_code = False
+        in_quote = False
 
         for lineIndex, line in enumerate(textList, 0):
             line = list(line)
@@ -121,6 +123,16 @@ def gen(post):
 
                         tempLine.append(newChar)
 
+                # Quotes
+                elif char == ">" and first_char:
+                    if not in_quote:
+                        newChar = "<blockquote>"
+                        in_quote = True
+                    else:
+                        newChar = ""
+                    
+                    tempLine.append(newChar)
+
                 # Underlining
                 elif char == "_":
                     if not in_underline and prevChar == " ":
@@ -148,42 +160,82 @@ def gen(post):
                         del tempLine[-1]
                         tempLine.append("=")
 
+                # Code tags
+                elif char == "`":
+                    if not in_code and prevChar != "\\":
+                        newChar = "<code>"
+                        in_code = True
+                    elif in_code and prevChar != "\\":
+                        newChar = "<\code>"
+                        in_code = False
+                    else:
+                        del tempLine[-1]
+                        newChar = "`"
+
+                    tempLine.append(newChar)
+
                 else:
                     if newChar != "":
                         tempLine.append(newChar)
 
-                # Close unclosed <li>s
-                if in_ul and index == len(line)-1:
-                    try:
-                        nextLine = textList[lineIndex+1]
-                    except:
-                        nextLine = []
+                # Close unclosed <ul>s, <li>s and <blockquote>s
+                if index == len(line)-1:
+                    if in_ul or in_quote:
+                        try:
+                            nextLine = textList[lineIndex+1]
+                        except:
+                            nextLine = []
 
-                    try:
-                        lineAfterNext = textList[lineIndex+2]
-                    except:
-                        lineAfterNext = []
+                        try:
+                            lineAfterNext = textList[lineIndex+2]
+                        except:
+                            lineAfterNext = []
 
-                    lineBreak = list("\n<br/>")
-                    listElement = "*"
+                        lineBreak = list("\n<br/>")
+                        listElement = "*"
+                        quoteMarker = ">"
 
-                    try:
-                        if nextLine[1] == "*" and nextLine[2] == " ":
-                            continuingList = True
-                        elif lineAfterNext[1] == "*" and lineAfterNext[2] == " ":
-                            continuingList = True
-                        else:
+                    if in_ul:
+                        try:
+                            if nextLine[1] == listElement and nextLine[2] == " ":
+                                continuingList = True
+                            elif lineAfterNext[1] == listElement and lineAfterNext[2] == " ":
+                                continuingList = True
+                            else:
+                                continuingList = False
+                        except IndexError:
                             continuingList = False
-                    except IndexError:
-                        continuingList = False
 
-                    if line != lineBreak and continuingList:
-                        tempLine.append("</li>")
-                    elif line != lineBreak:
-                        tempLine.append("</li>\n</ul>")
-                        in_ul = False
-                    else:
-                        tempLine = ""
+                        if line != lineBreak and continuingList:
+                            tempLine.append("</li>")
+                        elif line != lineBreak:
+                            tempLine.append("</li>\n</ul>")
+                            in_ul = False
+                        else:
+                            tempLine = ""
+
+                    elif in_quote:
+                        try:
+                            if nextLine[1] == quoteMarker and nextLine[2] == " ":
+                                continuingQuote = True
+                            elif lineAfterNext[1] == quoteMarker and lineAfterNext[2] == " ":
+                                continuingQuote = True
+                            else:
+                                continuingQuote = False
+                        except IndexError:
+                            continuingQuote = False
+
+                        if tempLine[1] == "" and tempLine[2] == " ":
+                            tempLine = tempLine[3:]
+                            tempLine.insert(0, "\n")
+
+                        if line != lineBreak and continuingQuote:
+                            tempLine.append("<br/>")
+                        elif line != lineBreak:
+                            tempLine.append("</blockquote>")
+                            in_quote = False
+                        elif line == lineBreak:
+                            tempLine = ""
 
             # Cleaning up unclosed tags
             if in_italics:
@@ -239,9 +291,20 @@ A list:
 More _things_ go here. Underlines_in_middle_of_word
 Escaped \*asterisk and \_underscore
 
-Heading
+Code
 =
-Blah"""
+This is some code:
+`Code here
+Bwup
+Bwop`
+
+A famous quote
+=
+Here is a famous quote said by Mr Dude
+>I am Mr Dude
+> That is my name
+> Now go away
+What an insightful quote"""
 
     html = gen(testPost)
     print(html)
