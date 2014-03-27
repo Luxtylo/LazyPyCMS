@@ -119,35 +119,38 @@ def gen(post):
                         tempLine.append(newChar)
 
                 # Close unclosed <li>s
-                try:
-                    if in_ul and index == len(line)-1:
-                        try:
-                            nextLine = textList[lineIndex+1][1]
-                        except:
-                            nextLine = None
+                if in_ul and index == len(line)-1:
+                    try:
+                        nextLine = textList[lineIndex+1]
+                    except:
+                        nextLine = []
 
-                        try:
-                            lineAfterNext = textList[lineIndex+1][1]
-                        except:
-                            lineAfterNext = None
+                    try:
+                        lineAfterNext = textList[lineIndex+2]
+                    except:
+                        lineAfterNext = []
 
-                        listElement = list("\n<br/>")
+                    lineBreak = list("\n<br/>")
+                    listElement = "*"
 
-                        """if listElement in nextLine or listElement in lineAfterNext:
+                    try:
+                        if nextLine[1] == "*" and nextLine[2] == " ":
+                            continuingList = True
+                        elif lineAfterNext[1] == "*" and lineAfterNext[2] == " ":
                             continuingList = True
                         else:
-                            continuingList = False"""
-                        continuingList = True
+                            continuingList = False
+                    except IndexError:
+                        continuingList = False
 
-                        print(repr(line))
+                    if line != lineBreak and continuingList:
+                        tempLine.append("</li>")
+                    elif line != lineBreak:
+                        tempLine.append("</li>\n</ul>")
+                        in_ul = False
+                    else:
+                        tempLine = ""
 
-                        if line != list("\n<br/>") and continuingList:
-                            tempLine.append("</li>")
-                        elif line == list("\n<br/>"):
-                            tempLine = ""
-                except:
-                    pass
-            
             # Cleaning up unclosed tags
             if in_italics:
                 tempLine.append("</i>")
@@ -195,7 +198,9 @@ Here are *some italics*
 A list:
 * Blah
 * Bloh
-* Bluh"""
+* Bluh
+
+More things go here"""
 
     html = gen(testPost)
     print(html)
