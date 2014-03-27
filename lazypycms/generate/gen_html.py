@@ -121,6 +121,7 @@ def gen(post):
 
                         tempLine.append(newChar)
 
+                # Underlining
                 elif char == "_":
                     if not in_underline and prevChar == " ":
                         newChar = "<u>"
@@ -134,6 +135,18 @@ def gen(post):
                         newChar = "_"
 
                     tempLine.append(newChar)
+                
+                # Headings
+                elif char == "=":
+                    if first_char:
+                        textList[lineIndex-3] = ""
+                        textList[lineIndex-2] = "\n<h4>" + textList[lineIndex-2][1:] + "</h4>\n<p>"
+                        textList[lineIndex-1], textList[lineIndex], textList[lineIndex+1] = "", "", ""
+                        if textList[lineIndex+2].startswith("\n"):
+                            textList[lineIndex+2] = textList[lineIndex+2][1:]
+                    elif prevChar == "\\":
+                        del tempLine[-1]
+                        tempLine.append("=")
 
                 else:
                     if newChar != "":
@@ -181,7 +194,8 @@ def gen(post):
                 tempLine.append("</b>")
                 in_bold = False
 
-            textList[lineIndex] = "".join(tempLine)
+            if tempLine != []:
+                textList[lineIndex] = "".join(tempLine)
 
         return textList
 
@@ -190,7 +204,8 @@ def gen(post):
 
     def join_list(finalList):
         for lineIndex, line in enumerate(finalList):
-            finalList[lineIndex] = "".join(line)
+            if line != "":
+                finalList[lineIndex] = "".join(line)
         return "".join(finalList)
 
     contents = post.contents.split("\n")
@@ -222,7 +237,11 @@ A list:
 * Bluh
 
 More _things_ go here. Underlines_in_middle_of_word
-Escaped \*asterisk and \_underscore"""
+Escaped \*asterisk and \_underscore
+
+Heading
+=
+Blah"""
 
     html = gen(testPost)
     print(html)
