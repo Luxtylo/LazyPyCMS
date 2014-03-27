@@ -52,6 +52,7 @@ def gen(post):
         first_char = True
         in_italics = False
         in_bold = False
+        in_underline = False
         in_ul = False
 
         for lineIndex, line in enumerate(textList, 0):
@@ -68,14 +69,20 @@ def gen(post):
 
                 newChar = char
 
+                try:
+                    nextChar = line[index + 1]
+                except IndexError:
+                    nextChar = None
+
+                try:
+                    prevChar = line[index - 1]
+                except IndexError:
+                    prevChar = None
+
                 if char == "*":
-                    try:
-                        nextChar = line[index + 1]
-                    except IndexError:
-                        nextChar = None
 
                     # Italics
-                    if nextChar != "*" and not first_char:
+                    if nextChar != "*" and nextChar != " ":
                         if not in_italics:
                             newChar = "<i>"
                             in_italics = True
@@ -87,7 +94,7 @@ def gen(post):
                             tempLine.append(newChar)
 
                     # Bold
-                    elif nextChar == "*" and not first_char:
+                    elif nextChar == "*" and nextChar != " ":
                         if not in_bold:
                             newChar = "<b>"
                             in_bold = True
@@ -106,13 +113,24 @@ def gen(post):
                             newChar = "<ul>\n<li>"
                             in_ul = True
                             line[index + 1] = ""
-                            #del textList[lineIndex-1]
                         else:
                             newChar = "<li>"
                             line[index + 1] = ""
-                            #del textList[lineIndex-1]
 
                         tempLine.append(newChar)
+
+                elif char == "_":
+                    print("UL", in_underline, repr(prevChar), repr(nextChar))
+                    if not in_underline and prevChar == " ":
+                        newChar = "<u>"
+                        in_underline = True
+                    elif in_underline and nextChar == " ":
+                        newChar = "</u>"
+                        in_underline = False
+                    else:
+                        newChar = "_"
+
+                    tempLine.append(newChar)
 
                 else:
                     if newChar != "":
@@ -200,7 +218,7 @@ A list:
 * Bloh
 * Bluh
 
-More things go here"""
+More _things_ go here. Underlines_in_middle_of_word"""
 
     html = gen(testPost)
     print(html)
