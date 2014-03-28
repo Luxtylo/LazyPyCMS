@@ -97,6 +97,7 @@ def gen(post):
                             newChar = "*"
 
                         tempLine.append(newChar)
+                        #print(tempLine)
 
                     # Bold
                     elif nextChar == "*" and nextChar != " ":
@@ -166,7 +167,7 @@ def gen(post):
                         newChar = "<code>"
                         in_code = True
                     elif in_code and prevChar != "\\":
-                        newChar = "<\code>"
+                        newChar = "</code>"
                         in_code = False
                     else:
                         del tempLine[-1]
@@ -260,16 +261,33 @@ def gen(post):
                 finalList[lineIndex] = "".join(line)
         return "".join(finalList)
 
+    def get_templates():
+        try:
+            with open("../templates/testTemplate", "r") as testTemplate:
+                template = testTemplate.read()
+        except FileNotFoundError:
+            template = None
+        
+        templateDict = {"test": template}
+        
+        return templateDict
+
     contents = post.contents.split("\n")
 
     layout = initial_layout()
     formatting = formatting_tags(layout)
-    finalHTML = join_list(formatting)
+    HTML = join_list(formatting)
+
+    templates = get_templates()
+    finalHTML = templates["test"].format(title="Test post please ignore", contents=HTML)
+
+    with open("test.html", "w+") as testPost:
+        testPost.write(finalHTML)
 
     return finalHTML
 
 def testRun():
-    """Test HTML generation unewlinesing a test post"""
+    """Test HTML generation using a test post"""
     testPost = Post()
     testPost.title = "Test"
     testPost.postTime = datetime(2014, 3, 24, 16, 10, 21, 493135)
@@ -307,7 +325,7 @@ Here is a famous quote said by Mr Dude
 What an insightful quote"""
 
     html = gen(testPost)
-    print(html)
+    #print(html)
 
 if __name__ == "__main__":
     testRun()
