@@ -20,6 +20,7 @@ You should have received a copy of the GNU General Public License along with
 
 from make_post import Post
 from datetime import datetime
+import os
 
 def gen(post, debug=False):
     """Generate HTML from the post passed to it"""
@@ -271,6 +272,8 @@ def gen(post, debug=False):
         return templateDict
 
     contents = post.contents.split("\n")
+    number = post.number
+    postNumString = str(number).zfill(4)
 
     layout = initial_layout()
     formatting = formatting_tags(layout)
@@ -284,6 +287,11 @@ def gen(post, debug=False):
             testPost.write(finalHTML)
     else:
         finalHTML = templates["test"].format(title=post.title, contents=HTML)
+        directory = "../posts/" + postNumString + "/"
+        HTMLLocation = directory + postNumString + ".html"
+
+        with open(HTMLLocation, "w+") as HTMLFile:
+            HTMLFile.write(finalHTML)
 
     return finalHTML
 
@@ -296,6 +304,7 @@ def testRun():
     testPost.headerImage = "HEADERIMG.jpg"
     testPost.tag = "Photography"
     testPost.made = True
+    testPost.number = 2
     testPost.contents = """Hello.
 
 This is a post.
@@ -326,7 +335,7 @@ Here is a famous quote said by Mr Dude
 What an insightful quote"""
 
     html = gen(testPost, True)
-    print(repr(html))
+    #print(repr(html))
 
 if __name__ == "__main__":
     testRun()

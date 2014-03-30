@@ -89,7 +89,13 @@ if __name__ == "__main__":
             for dirpath, dnames, fnames in os.walk("../posts"):
                 postNameList.append(dnames)
 
-            postNumber = len(postNameList) - 1
+            postNumber = len(postNameList[0])
+
+            postDir = "../posts/" + str(postNumber).zfill(4) + "/"
+
+            if not os.path.exists(postDir):
+                os.makedirs(postDir)
+                os.makedirs(postDir + "images/")
 
             post = make_post.newPost(siteName, siteCategories, postNumber)
             
@@ -97,7 +103,7 @@ if __name__ == "__main__":
                 post = preview.gen_preview(post)
 
                 if post.isVisible:
-                    html = gen_html.gen(post, True)
+                    html = gen_html.gen(post)
                     print(html)
 
         elif "update" in args:
