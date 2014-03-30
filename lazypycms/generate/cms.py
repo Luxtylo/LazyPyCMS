@@ -85,13 +85,19 @@ if __name__ == "__main__":
 
         if "new" in args:
             print("New post")
-            post = make_post.newPost(siteName, siteCategories)
+            postNameList = []
+            for dirpath, dnames, fnames in os.walk("../posts"):
+                postNameList.append(dnames)
+
+            postNumber = len(postNameList) - 1
+
+            post = make_post.newPost(siteName, siteCategories, postNumber)
             
             if post is not 0:
                 post = preview.gen_preview(post)
 
                 if post.isVisible:
-                    html = gen_html.gen(post)
+                    html = gen_html.gen(post, True)
                     print(html)
 
         elif "update" in args:

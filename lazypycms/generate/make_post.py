@@ -33,13 +33,16 @@ class Post():
         self.preview = None
         self.tag = None
         self.made = False
+        self.number = False
 
 class PostMaker:
     """GUI and associated functions for making posts"""
-    def __init__(self, siteName, categories):
+    def __init__(self, siteName, categories, postNum):
         self.siteName = siteName
 
         self.post = Post()
+
+        self.post.number = postNum
 
         self.postTags = categories
 
@@ -130,9 +133,9 @@ class PostMaker:
 
         self.root.destroy()
 
-def newPost(siteName, categories):
+def newPost(siteName, categories, postNum):
     """Create a new post using the post creation UI"""
-    makePost = PostMaker(siteName, categories)
+    makePost = PostMaker(siteName, categories, postNum)
     try:
         post = makePost.post
         if post.made is True:
@@ -147,4 +150,5 @@ if __name__ == "__main__":
     """Test newPost using a test siteName and categories"""
     siteName = "test.co.uk"
     categories = ["None", "Cat1", "Cat2", "Cat3"]
-    newPost(siteName, categories)
+    postNumber = 0
+    newPost(siteName, categories, postNumber)
