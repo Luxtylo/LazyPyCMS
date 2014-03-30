@@ -91,7 +91,8 @@ if __name__ == "__main__":
                 post = preview.gen_preview(post)
 
                 if post.isVisible:
-                    gen_html.gen(post)
+                    html = gen_html.gen(post)
+                    print(html)
 
         elif "update" in args:
             print("Updating")

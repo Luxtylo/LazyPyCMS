@@ -21,7 +21,7 @@ You should have received a copy of the GNU General Public License along with
 from make_post import Post
 from datetime import datetime
 
-def gen(post):
+def gen(post, debug=False):
     """Generate HTML from the post passed to it"""
     def initial_layout():
         textList = []
@@ -82,22 +82,17 @@ def gen(post):
                     prevChar = None
 
                 if char == "*":
-
-                    # Italics
-                    if nextChar != "*":
-                        if prevChar != "\\":
-                            if not in_italics and nextChar != " ":
-                                newChar = "<i>"
-                                in_italics = True
-                            else:
-                                newChar = "</i>"
-                                in_italics = False
+                    # Bullet points (ie <ul>s)
+                    if nextChar == " " and first_char:
+                        if not in_ul:
+                            newChar = "<ul>\n<li>"
+                            in_ul = True
+                            line[index + 1] = ""
                         else:
-                            del tempLine[-1]
-                            newChar = "*"
+                            newChar = "<li>"
+                            line[index + 1] = ""
 
                         tempLine.append(newChar)
-                        #print(tempLine)
 
                     # Bold
                     elif nextChar == "*" and nextChar != " ":
@@ -112,15 +107,18 @@ def gen(post):
 
                         tempLine.append(newChar)
 
-                    # Bullet points (ie <ul>s)
-                    elif nextChar == " " and first_char:
-                        if not in_ul:
-                            newChar = "<ul>\n<li>"
-                            in_ul = True
-                            line[index + 1] = ""
+                    # Italics
+                    else:
+                        if prevChar != "\\":
+                            if not in_italics:
+                                newChar = "<i>"
+                                in_italics = True
+                            elif in_italics:
+                                newChar = "</i>"
+                                in_italics = False
                         else:
-                            newChar = "<li>"
-                            line[index + 1] = ""
+                            del tempLine[-1]
+                            newChar = "*"
 
                         tempLine.append(newChar)
 
@@ -279,17 +277,20 @@ def gen(post):
     HTML = join_list(formatting)
 
     templates = get_templates()
-    finalHTML = templates["test"].format(title="Test post please ignore", contents=HTML)
 
-    with open("test.html", "w+") as testPost:
-        testPost.write(finalHTML)
+    if debug:
+        finalHTML = templates["test"].format(title=post.title, contents=HTML)
+        with open("test.html", "w+") as testPost:
+            testPost.write(finalHTML)
+    else:
+        finalHTML = templates["test"].format(title=post.title, contents=HTML)
 
     return finalHTML
 
 def testRun():
     """Test HTML generation using a test post"""
     testPost = Post()
-    testPost.title = "Test"
+    testPost.title = "Test post please ignore."
     testPost.postTime = datetime(2014, 3, 24, 16, 10, 21, 493135)
     testPost.isVisible = True
     testPost.headerImage = "HEADERIMG.jpg"
@@ -324,8 +325,8 @@ Here is a famous quote said by Mr Dude
 > Now go away
 What an insightful quote"""
 
-    html = gen(testPost)
-    #print(html)
+    html = gen(testPost, True)
+    print(repr(html))
 
 if __name__ == "__main__":
     testRun()
