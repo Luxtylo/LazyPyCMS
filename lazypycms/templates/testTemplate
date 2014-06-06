@@ -1,6 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <title>{title}</title>
+<meta name="description" content="PAGE CONTENT PREVIEW FOR GOOGLE">
 </head>
 <body>
 {contents}

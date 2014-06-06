@@ -23,9 +23,11 @@ It can be run with the arguments:
     update - Update the HTML files in the project
 """
 
-import sys
 import os
-import make_post, preview, gen_html
+import make_post
+import preview
+import gen_html
+import parse_args
 
 def posts_iterate():
     """Iterate through posts and get their information"""
@@ -74,46 +76,36 @@ def get_site_details():
         
         return (siteName, siteCategories)
 
-if __name__ == "__main__":
-    slashChar = os_specifics()
-    pythonFileLocation = os.path.dirname(os.path.realpath(__file__)) + slashChar
+args = parse_args.parser.parse_args()
 
-    (siteName, siteCategories) = get_site_details()
+slashChar = os_specifics()
+pythonFileLocation = os.path.dirname(os.path.realpath(__file__)) + slashChar
 
-    if len(sys.argv) > 1:
-        args = sys.argv[1:]
+(siteName, siteCategories) = get_site_details()
 
-        if "new" in args:
-            print("New post")
-            postNameList = []
-            for dirpath, dnames, fnames in os.walk("../posts"):
-                postNameList.append(dnames)
+if args.new or args.edit is not None:
+    print("New post")
+    postNameList = []
+    for dirpath, dnames, fnames in os.walk("../posts"):
+        postNameList.append(dnames)
 
-            postNumber = len(postNameList[0])
+    postNumber = len(postNameList[0])
 
-            postDir = "../posts/" + str(postNumber).zfill(4) + "/"
+    postDir = "../posts/" + str(postNumber).zfill(4) + "/"
 
-            if not os.path.exists(postDir):
-                os.makedirs(postDir)
-                os.makedirs(postDir + "images/")
+    if not os.path.exists(postDir):
+        os.makedirs(postDir)
+        os.makedirs(postDir + "images/")
 
-            post = make_post.newPost(siteName, siteCategories, postNumber)
-            
-            if post is not 0:
-                post = preview.gen_preview(post)
+    post = make_post.newPost(siteName, siteCategories, postNumber)
+    
+    if post is not 0:
+        post = preview.gen_preview(post)
 
-                if post.isVisible:
-                    html = gen_html.gen(post)
-                    print(html)
+        if post.isVisible:
+            html = gen_html.gen(post)
+            print(html)
 
-        elif "update" in args:
-            print("Updating")
-            posts_iterate()
-
-        elif not "new" in args and not "update" in args: # Unrecognised arguments
-            print("\nUnrecognised arguments given. Give arguments:\n  \"new\" to make a new post\n  \"update\" to generate all posts and the front page")
-            sys.exit("Unrecognised arguments. Exited.")
-
-    else: # If no arguments given
-        print("\nNo arguments given. Give arguments:\n  \"new\" to make a new post\n  \"update\" to generate all posts and the front page")
-        sys.exit("No arguments given. Exited.")
+else:
+    print("Updating")
+    posts_iterate()
