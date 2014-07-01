@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>George Bryant</title>
+    <link rel="stylesheet" type="text/css" href="reset.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,300italic|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+
+    <script type="text/javascript">
+        function draw(){
+            var canvas = document.getElementById("header_img");
+            if(canvas.getContext){
+                var ctx = canvas.getContext("2d");
+
+                header_image = new Image();
+                header_image.src = "img/luxtylogo.png";
+                header_image.onload = function(){
+                    ctx.drawImage(header_image, 12, 0);
+                }
+
+                ctx.fillStyle = "rgb(20,20,20)";
+                ctx.fillRect(0,97,25,11);
+                ctx.fillRect(405,22,595,11);
+
+                ctx.fillStyle = "rgb(40,40,40)";
+                ctx.fillRect(0,108,25,25);
+                ctx.fillRect(405,33,595,100);
+            }
+        }
+    </script>
+</head>
+<body onload="draw();">
+    <header>
+        <div id="sitename" class="title">
+            <!--<a href="index.html" class="title">Luxtylo</a>
+            <img src="img/header_img.png" id="headerimg" width=980 height=125 />--!>
+            <canvas id="header_img" width=1000 height=125>
+            </canvas>
+        </div>
+        <nav>
+            <a href="index.html" class="title">HOME</a>
+            <a href="design.html" class="title">DESIGN</a>
+            <a href="photography.html" class="title">PHOTOGRAPHY</a>
+            <a href="code.html" class="title">CODE</a>
+            <!--<a href="contact.html" class="title">Contact</a>-->
+        </nav>
+        <div class="title" id="motd">
+            Who needs proofreading?
+        </div>
+        <script type="text/javascript">
+            var motds = new Array ();
+            motds[0] = "Who needs proofreading?";
+            motds[1] = "Regular post schedule? Nah.";
+            motds[2] = "Making stuff, breaking stuff";
+            motds[3] = 'if viewer==True: print("Hi!")';
+            motds[4] = "Powered by LazyPyCMS!";
+            motds[5] = "Randomly generated MOTD";
+
+            function getMotd() {
+                return motds[Math.floor(Math.random() * motds.length)];
+            }
+
+            document.getElementById("motd").innerHTML = getMotd();
+        </script>
+    </header>
+    <main>
+        <h1 class="title">Posts</h1>
+        <article class="text fixul">
+            <a href="post.html">
+                <img src="../posts/0001/images/previewImageResized.png" alt="A forest scene" class="postpreviewimage"></img>
+                <h2 class="title">Moving my PC</h2>
+            </a>
+            The old position of my PC was not ideal. It was in the far corner of our living room, making plenty of noise to irritate whoever was watching TV at the time. It was a relief when it turned off. So I set out to:<br/>
+            <ul>
+                <li>Get my PC out of the living room</li>
+            </ul>
+            <div class="clear">&nbsp;</div>
+        </article>
+        <article class="text fixul">
+            <a href="post2.html">
+                <img src="../posts/0000/images/previewImageResized.png" alt="A snowy scene" class="postpreviewimage"></img>
+                <h2 class="title">Continuing an old project</h2>
+            </a>
+            It's been a long time, but I've started working on an old project again: my electric guitar. I stopped back in late 2009 or early 2010 - I just didn't have the tools, skills or motivation I needed to continue. Maybe now I do. All I know is that I'm getting sick of looking at the parts in my garage whenever I work on something else.
+            <div class="clear">&nbsp;</div>
+        </article>
+        <article class="text fixul">
+            <a href="post.html">
+                <img src="../posts/0001/images/previewImageResized.png" alt="A forest scene" class="postpreviewimage"></img>
+                <h2 class="title">Moving my PC</h2>
+            </a>
+            The old position of my PC was not ideal. It was in the far corner of our living room, making plenty of noise to irritate whoever was watching TV at the time. It was a relief when it turned off. So I set out to:<br/>
+            <ul>
+                <li>Get my PC out of the living room</li>
+            </ul>
+            <div class="clear">&nbsp;</div>
+        </article>
+        <article class="text fixul">
+            <a href="post2.html">
+                <img src="../posts/0000/images/previewImageResized.png" alt="A snowy scene" class="postpreviewimage"></img>
+                <h2 class="title">Continuing an old project</h2>
+            </a>
+            It's been a long time, but I've started working on an old project again: my electric guitar. I stopped back in late 2009 or early 2010 - I just didn't have the tools, skills or motivation I needed to continue. Maybe now I do. All I know is that I'm getting sick of looking at the parts in my garage whenever I work on something else.
+            <div class="clear">&nbsp;</div>
+        </article>
+    </main>
+    <footer>
+        <div id="generator" class="text">
+            Powered by <a href="http://github.com/Luxtylo/LazyPyCMS">LazyPyCMS</a>
+        </div>
+        <div id="copyright" class="text">
+            Copyright &copy; 2014 <a href="contact.html">George Bryant</a>
+        </div>
+    </footer>
+</body>
+</html>

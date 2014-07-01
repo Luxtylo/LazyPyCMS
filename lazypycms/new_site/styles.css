@@ -1,0 +1,131 @@
+"""
+Styles for Luxtylo site
+"""
+
+body {
+    width: 1000px;
+}
+
+header {
+    width: 1000px;
+    height: 160px;
+    margin: 10px auto 0 auto;
+    /*padding: 10px;*/
+    background-color: #282828;
+}
+
+#header_img {
+    background-color: #EBEBEB;
+}
+
+nav {
+    padding: 0 10px 17px 10px;
+    float: left;
+}
+
+nav .title:link {
+    margin: 0;
+    padding: 10px 5px 10px 5px;
+    color: #EBEBEB;
+
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+}
+
+nav .title:visited {
+    margin: 0;
+    padding: 10px 5px 10px 5px;
+    color: #EBEBEB;
+}
+
+nav .title:hover {
+    /*background-color: #151515;*/
+    color: #999;
+}
+
+#motd {
+    float: right;
+    padding: 0 10px;
+    color: #EBEBEB;
+}
+
+.title {
+    font-family: "Open Sans", Arial, sans-serif;
+    font-weight: 600;
+}
+
+.title:link{
+    text-decoration: none;
+    color: #000000;
+}
+
+.title:visited{
+    text-decoration: none;
+    color: #000000;
+}
+
+main {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 20px 10px;
+    font-size: 24pt;
+}
+
+h2 {
+    padding: 5px 0;
+    font-size: 20pt;
+}
+
+article {
+    margin: 10px 0px;
+    height: 154px;
+    background-color: #F8F8F8;
+}
+
+.postpreviewimage {
+    margin-right: 10px;
+    padding: 5px;
+    width: 256px;
+    float: left;
+}
+
+.text {
+    font-family: "Source Sans Pro", Arial, sans-serif;
+    font-size: 12pt;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #202020;
+}
+
+a {
+    text-decoration: none;
+    color: #101010;
+}
+
+footer {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#generator {
+    float: left;
+    padding: 0 10px 10px 10px;
+    font-size: 8pt;
+}
+
+#copyright {
+    float: right;
+    padding: 0 10px 10px 10px;
+    font-size: 8pt;
+}
+
+/* Fixing fonts */
+* {
+    -webkit-font-smoothing: antialiased;
+}
