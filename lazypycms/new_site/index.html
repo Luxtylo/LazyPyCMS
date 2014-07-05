@@ -12,6 +12,8 @@
             var canvas = document.getElementById("header_img");
             if(canvas.getContext){
                 var ctx = canvas.getContext("2d");
+                var canvasWidth = window.innerWidth * 0.98 - 15;
+                ctx.canvas.width = canvasWidth;
 
                 header_image = new Image();
                 header_image.src = "img/luxtylogo.png";
@@ -19,19 +21,24 @@
                     ctx.drawImage(header_image, 12, 0);
                 }
 
+                var rightWidth  = canvasWidth - 405;
+                //595
+
+                // Dark parts
                 ctx.fillStyle = "rgb(20,20,20)";
                 ctx.fillRect(0,97,25,11);
-                ctx.fillRect(405,22,595,11);
+                ctx.fillRect(405,22,rightWidth,11);
 
+                // Light parts
                 ctx.fillStyle = "rgb(40,40,40)";
                 ctx.fillRect(0,108,25,25);
-                ctx.fillRect(405,33,595,100);
+                ctx.fillRect(405,33,rightWidth,100);
             }
         }
     </script>
 </head>
 <body onload="draw();">
-    <header>
+    <header id="header">
         <div id="sitename" class="title">
             <!--<a href="index.html" class="title">Luxtylo</a>
             <img src="img/header_img.png" id="headerimg" width=980 height=125 />--!>
